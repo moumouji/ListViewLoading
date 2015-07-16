@@ -1,6 +1,10 @@
 package hp.listviewloading;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +21,13 @@ import java.util.ArrayList;
 public class MyListAdapter extends BaseAdapter {
 
     private Context context;
+    private Resources res;
     private ArrayList<ListValues> items = new ArrayList<ListValues>();
+    private Bitmap bmp;
 
-    public MyListAdapter(Context context, ArrayList<ListValues> items){
+    public MyListAdapter(Context context, Resources res, ArrayList<ListValues> items){
         this.context = context;
+        this.res = res;
         this.items = items;
         for(int i = 0;i < items.size(); i++){
             Log.i("adapterItems", items.get(i).toString());
@@ -55,7 +62,9 @@ public class MyListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        viewHolder.imv.setImageResource(items.get(position).getImage());
+        bmp =BitmapFactory.decodeResource(res, items.get(position).getImage());
+        //viewHolder.imv.setImageResource(items.get(position).getImage());
+        viewHolder.imv.setImageBitmap(bmp);
         viewHolder.tv.setText(items.get(position).getTxt());
         return convertView;
     }

@@ -27,7 +27,7 @@ public class MainActivity extends Activity implements GetData{
         //初始化列表数据
         items = itemData();
         listView = (MyListView)findViewById(R.id.MyList);
-        adapter = new MyListAdapter(getApplicationContext(), items);
+        adapter = new MyListAdapter(getApplicationContext(), getResources(), items);
         listView.setAdapter(adapter);
         //初始化ProgressBar
         listView.setLoadingBar(getApplicationContext());
